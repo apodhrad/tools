@@ -8,7 +8,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>switchyard-tools-eclipse-site</artifactId>
-  <packaging>eclipse-update-site</packaging>
+  <packaging>eclipse-repository</packaging>
   <name>SwitchYard: Eclipse Tools Update Site</name>
   <description>Eclipse update site for SwitchYard tooling.</description>
 

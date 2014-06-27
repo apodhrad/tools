@@ -17,4 +17,16 @@
          Tools for creating, testing, and debugging SwitchYard applications.
       </description>
    </category-def>
+
+   <feature url="features/org.switchyard.tools.feature.source_0.0.0.jar" id="org.switchyard.tools.feature.source" version="0.0.0">
+      <category name="switchyard.category.source"/>
+   </feature>
+   <feature url="features/org.switchyard.tools.bpel.feature.source_0.0.0.jar" id="org.switchyard.tools.bpel.feature.source" version="0.0.0">
+      <category name="switchyard.category.source"/>
+   </feature>
+   <feature url="features/org.switchyard.tools.bpmn2.feature.source_0.0.0.jar" id="org.switchyard.tools.bpmn2.feature.source" version="0.0.0">
+      <category name="switchyard.category.source"/>
+   </feature>
+   <category-def name="switchyard.category.source" label="SwitchYard Tools Sources">
+   </category-def>
 </site>
