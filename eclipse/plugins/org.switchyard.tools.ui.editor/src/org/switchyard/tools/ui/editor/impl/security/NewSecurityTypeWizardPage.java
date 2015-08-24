@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.SelectionDialog;
+import org.eclipse.ui.forms.FormColors;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.switchyard.tools.models.switchyard1_0.switchyard.PropertiesType;
 import org.switchyard.tools.models.switchyard1_0.switchyard.PropertyType;
@@ -92,13 +93,18 @@ public class NewSecurityTypeWizardPage extends WizardPage {
 
     protected NewSecurityTypeWizardPage(String pageName) {
         super(pageName);
+
+        FormColors colors= new FormColors(Display.getCurrent());
+        colors.setBackground(null);
+        colors.setForeground(null);
+        _toolkit= new FormToolkit(colors);
+        if (_toolkit.getBorderStyle() == SWT.NULL) {
+        	_toolkit.setBorderStyle(SWT.BORDER);
+        }
     }
 
     @Override
     public void createControl(Composite parent) {
-        if (_toolkit == null) {
-            _toolkit = new FormToolkit(parent.getDisplay());
-        }
         Composite client3 = _toolkit.createComposite(parent, SWT.WRAP);
         GridLayout layout3 = new GridLayout();
         layout3.numColumns = 3;
