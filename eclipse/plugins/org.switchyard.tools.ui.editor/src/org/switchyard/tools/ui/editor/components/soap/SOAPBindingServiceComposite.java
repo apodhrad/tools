@@ -223,7 +223,6 @@ public class SOAPBindingServiceComposite extends AbstractSYBindingComposite {
         GridData upChxGD = new GridData(GridData.FILL_HORIZONTAL);
         upChxGD.horizontalSpan = 3;
         _unwrappedPayloadCheckbox.setLayoutData(upChxGD);
-        _unwrappedPayloadCheckbox.setEnabled(is21Model());
         
         _copyNamespacesCheckbox = createCheckbox(composite, Messages.SOAPBindingReferenceComposite_label_copyNamespaces);
         GridData cnChxGD = new GridData(GridData.FILL_HORIZONTAL);
@@ -603,11 +602,25 @@ public class SOAPBindingServiceComposite extends AbstractSYBindingComposite {
                 if (unwrapped != null || copyNamespaces != null) {
                     final MessageComposerType msgComposer = SOAPFactory.eINSTANCE
                             .createMessageComposerType();
-                    if (unwrapped != null) {
+                    final MessageComposerType oldMsgComposer = _binding.getMessageComposer();
+                    boolean unwrappedChanged = true;
+                    if (oldMsgComposer == null && unwrapped != null) {
+                    	unwrappedChanged = true;
+                    } else if (oldMsgComposer != null && oldMsgComposer.isUnwrapped() == unwrapped.booleanValue()) {
+                    	unwrappedChanged = false;
+                    }
+                    if (unwrapped != null && unwrappedChanged) {
                         msgComposer.setUnwrapped(unwrapped.booleanValue());
                     }
-                    if (copyNamespaces != null) {
-                        msgComposer.setCopyNamespaces(copyNamespaces.booleanValue());
+                    boolean copyNamespacesChanged = true;
+                    if (oldMsgComposer == null && copyNamespaces != null) {
+                    	copyNamespacesChanged = true;
+                    } else if (oldMsgComposer != null && oldMsgComposer.isCopyNamespaces() == copyNamespaces.booleanValue()) {
+                    	copyNamespacesChanged = false;
+                    }
+                    if (copyNamespaces != null && copyNamespaces.booleanValue() && copyNamespacesChanged) {
+                    	// if we have a change, push it up to the message composer
+                		msgComposer.setCopyNamespaces(copyNamespaces.booleanValue());
                     }
                     return msgComposer;
                 }
